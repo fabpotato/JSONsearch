@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QuezX</title>
+	<script type="text/javascript" src="js/data.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript">
+		function search(val){
+			var size = data.length;
+			var skillArray=[];
+			var a = 0;
+			console.log(size);
+			var content = "";
+			// for (var i = 0; i < 10; i++) {
+			// 	skillArray[i] = i;	
+			// 	console.log(skillArray[i]);
+			// }
+
+			for (var i = 0; i < size; i++) {
+				if(data[i].role.indexOf(val) > -1){
+					console.log(data[i].skills.length);
+					for (var j = 0; j < data[i].skills.length; j++) {
+						var flag = true;
+						for (var k = 0; k < a+1; k++) {
+							
+							if (skillArray[k]==data[i].skills[j]) {
+								flag = false;
+							}
+							
+						}
+						if(flag){
+							skillArray[a] = data[i].skills[j];
+							content = content + skillArray[a]+"</br>";
+							console.log(skillArray[a]);
+						}
+						a++;
+						//console.log(data[i].skills[j]);
+					}
+				}
+				document.getElementById("presults").innerHTML = content;
+			}
+			//console.log(data[1].skills[1]);
+		}
+
+		function searchSmart(val){
+			var size = data.length;
+			var map=[];
+			var a = 0;
+			//console.log(size);
+			var content = "";
+			// for (var i = 0; i < 10; i++) {
+			// 	skillArray[i] = i;	
+			// 	console.log(skillArray[i]);
+			// }
+
+			for (var i = 0; i < size; i++) {
+				if(data[i].role.indexOf(val) > -1){
+					//console.log(data[i].skills.length);
+					for (var j = 0; j < data[i].skills.length; j++) {
+						// var flag = true;
+						// for (var k = 0; k < a+1; k++) {
+							
+						// 	if (skillArray[k]==data[i].skills[j]) {
+						// 		flag = false;
+						// 	}
+							
+						// }
+						if (data[i].skills[j] in map){
+							map[data[i].skills[j]]++;
+						}
+						else{
+							map[data[i].skills[j]] = 1;
+						}
+
+						// if(falseg){
+						// 	skillArray[a] = data[i].skills[j];
+						// 	content = content + skillArray[a]+"</br>";
+						// 	console.log(skillArray[a]);
+						// }
+						// a++;
+						//console.log(data[i].skills[j]);
+					}
+				}
+				//document.getElementById("presults").innerHTML = content;
+				
+			}
+			//var testt = map;
+			//console.log(data[1].skills[1]);
+			//console.log(testt);
+			//Array.sort(map);
+			//console.log(map[1]);
+			var maxx = 0.1;
+			var temp = "";
+			//map["design"]=0;
+			//console.log(map);
+			//console.log(map.length);
+			while(maxx>0){
+				maxx=0.1;
+				for(var skill in map){
+					//console.log(skill);
+					if(map[skill]>=maxx){
+						maxx = map[skill];
+						temp = skill;
+
+						
+					}
+
+					//console.log(temp);
+				}
+
+				//console.log(maxx);
+				//console.log(map[temp]);
+				map[temp] = -1;
+				//console.log(map("UI"));
+				//console.log("a "+maxx);	
+				content = content + temp+"</br>"; 
+				//delete map[temp];
+				if(maxx==.1){
+					break;
+				}
+			}
+			//console.log(content);
+			document.getElementById("presults").innerHTML = content;
+		}
+		
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div id="container">
+		<center>
+			<img id="logo" src="images/quezx-logo.png">
+			</br><hr>
+			<p id="headd">Job Skill Recommendation System</p>
+		</center>
+		<form>
+		  	<input type="text" id="seachquery" name="searchBox">
+		  	<input type ="button" id="searchID" value="search" onclick="searchSmart(this.form.searchBox.value)">
+		</form>
+		<div>
+			<p id="tess">Top Recommended Skills for above Position</p>
+		</div>
+		<div id="results" style="height:200px; width:100%;">
+
+			<p id="presults">No Matches found</p>
+		</div>
+	</div>
+	
+
+	
+</body>
+</html>
