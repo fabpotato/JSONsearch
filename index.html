@@ -5,42 +5,7 @@
 	<script type="text/javascript" src="js/data.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript">
-		function search(val){
-			var size = data.length;
-			var skillArray=[];
-			var a = 0;
-			console.log(size);
-			var content = "";
-			// for (var i = 0; i < 10; i++) {
-			// 	skillArray[i] = i;	
-			// 	console.log(skillArray[i]);
-			// }
-
-			for (var i = 0; i < size; i++) {
-				if(data[i].role.indexOf(val) > -1){
-					console.log(data[i].skills.length);
-					for (var j = 0; j < data[i].skills.length; j++) {
-						var flag = true;
-						for (var k = 0; k < a+1; k++) {
-							
-							if (skillArray[k]==data[i].skills[j]) {
-								flag = false;
-							}
-							
-						}
-						if(flag){
-							skillArray[a] = data[i].skills[j];
-							content = content + skillArray[a]+"</br>";
-							console.log(skillArray[a]);
-						}
-						a++;
-						//console.log(data[i].skills[j]);
-					}
-				}
-				document.getElementById("presults").innerHTML = content;
-			}
-			//console.log(data[1].skills[1]);
-		}
+	
 
 		function searchSmart(val){
 			var size = data.length;
